@@ -103,14 +103,6 @@ public class TimerTest {
     }
 
     /**
-     * Tests that the minutes is 00 instead of 0
-     */
-    @Test
-    void testMinutesFormat() {
-        assertEquals("11:59 PM", Timer.addMinutes("11:00 PM", 59));//AM to PM);
-    }
-
-    /**
      * Tests that period changes when going from before midnight to midnight
      */
     @Test
@@ -130,7 +122,7 @@ public class TimerTest {
      * Tests that the correct time format for minutes is returned (12:01 AM not 12:1 AM)
      */
     @Test
-    void testAddPositive15() {
+    void testCorrectFormat3() {
         assertEquals("12:01 AM", Timer.addMinutes("11:02 PM", 59));//AM to PM);
     }
 }
