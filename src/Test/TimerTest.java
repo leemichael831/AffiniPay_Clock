@@ -1,15 +1,13 @@
 package Test;
 import Timer.Timer;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class TimerTest {
     /**
-     * Tests getValue() on an empty string.
+     * Tests addMinutes for a adding positive minutes
      */
     @Test
     void testAddPositive() {
@@ -17,139 +15,122 @@ public class TimerTest {
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests addMinutes for result to be 1:33 PM and not 13:33 PM
      */
     @Test
-    void testAddPositive2() {
-        assertEquals("1:33 PM", Timer.addMinutes("10:13 AM", 200));//AM to PM);
+    void testCorrectFormat1() {
+        assertEquals("1:33 PM", Timer.addMinutes("10:13 AM", 200));
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests addMinutes for subtracting minutes from a time
      */
     @Test
-    void testAddPositive3() {
-        assertEquals("6:53 AM", Timer.addMinutes("10:13 AM", -200));//AM to PM);
+    void testAddNegative() {
+        assertEquals("6:53 AM", Timer.addMinutes("10:13 AM", -200));
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests that addMinutes does not change the given time when 0 minutes is added
      */
     @Test
-    void testAddPositive4() {
-        assertEquals("12:00 AM", Timer.addMinutes("12:00 AM", 0));//AM to PM);
+    void testAddZero() {
+        assertEquals("12:00 AM", Timer.addMinutes("12:00 AM", 0));
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests that adding 12 hours to a given time changes the period
      */
     @Test
-    void testAddPositive5() {
+    void testChangePeriod1() {
         assertEquals("12:00 PM", Timer.addMinutes("12:00 AM", 720));//AM to PM);
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests that subtracting 12 hours to a given time changes the period
      */
     @Test
-    void testAddPositive5_2() {
+    void testChangePeriod2() {
         assertEquals("12:00 PM", Timer.addMinutes("12:00 AM", -720));//AM to PM);
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests that adding 24 hours to a given time does not change the period nor the time
      */
     @Test
-    void testAddPositive5_3() {
+    void testNoChangePeriod1() {
         assertEquals("12:00 AM", Timer.addMinutes("12:00 AM", 1440));//AM to PM);
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests that subtracting 24 hours to a given time does not change the period nor the time
      */
     @Test
-    void testAddPositive5_4() {
+    void testNoChangePeriod2() {
         assertEquals("12:00 AM", Timer.addMinutes("12:00 AM", -1440));//AM to PM);
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Test subtracting minutes from midnight will result in going from AM to PM
      */
     @Test
-    void testAddPositive6() {
+    void testChangePeriod3() {
         assertEquals("8:40 PM", Timer.addMinutes("12:00 AM", -200));//AM to PM);
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests that period changes when going from before noon to after noon
      */
     @Test
-    void testAddPositive7() {
+    void testAfterNoon() {
         assertEquals("11:50 AM", Timer.addMinutes("1:00 PM", -70));//AM to PM);
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests that period changes when going from before midnight to after midnight
      */
     @Test
-    void testAddPositive8() {
-        assertEquals("12:10 PM", Timer.addMinutes("11:00 AM", 70));//AM to PM);
-    }
-
-    /**
-     * Tests getValue() on an empty string.
-     */
-    @Test
-    void testAddPositive9() {
+    void testAfterMidnight() {
         assertEquals("12:10 AM", Timer.addMinutes("11:00 PM", 70));//AM to PM);
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests that period does not change when going from midnight to a time before noon
      */
     @Test
-    void testAddPositive10() {
+    void testAfterMidnight2() {
         assertEquals("12:00 AM", Timer.addMinutes("1:00 AM", -60));//AM to PM);
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests that the minutes is 00 instead of 0
      */
     @Test
-    void testAddPositive11() {
-        assertEquals("11:59 PM", Timer.addMinutes("1:00 AM", -61));//AM to PM);
-    }
-
-    /**
-     * Tests getValue() on an empty string.
-     */
-    @Test
-    void testAddPositive12() {
+    void testMinutesFormat() {
         assertEquals("11:59 PM", Timer.addMinutes("11:00 PM", 59));//AM to PM);
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests that period changes when going from before midnight to midnight
      */
     @Test
-    void testAddPositive13() {
+    void testMidnight3() {
         assertEquals("12:00 AM", Timer.addMinutes("11:00 PM", 60));//AM to PM);
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests that period changes when going from midnight to before midnight
      */
     @Test
-    void testAddPositive14() {
+    void testMidnight4() {
         assertEquals("12:00 AM", Timer.addMinutes("11:00 PM", 60));//AM to PM);
     }
 
     /**
-     * Tests getValue() on an empty string.
+     * Tests that the correct time format for minutes is returned (12:01 AM not 12:1 AM)
      */
     @Test
     void testAddPositive15() {
         assertEquals("12:01 AM", Timer.addMinutes("11:02 PM", 59));//AM to PM);
     }
-
 }
