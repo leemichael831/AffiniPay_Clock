@@ -122,7 +122,7 @@ public class TimerTest {
      * Tests that the correct time format for minutes is returned (12:01 AM not 12:1 AM)
      */
     @Test
-    void testCorrectFormat3() {
+    void testCorrectFormat2() {
         assertEquals("12:01 AM", Timer.addMinutes("11:02 PM", 59));//AM to PM);
     }
 }
